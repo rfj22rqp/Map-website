@@ -4,50 +4,34 @@
 <meta charset="utf-8">
 <title>Display a map on a webpage</title>
 <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+<link rel="stylesheet" href="style.css">
 <link href="https://api.mapbox.com/mapbox-gl-js/v3.7.0/mapbox-gl.css" rel="stylesheet">
 <script src="https://api.mapbox.com/mapbox-gl-js/v3.7.0/mapbox-gl.js"></script>
-<style>
-body { margin: 0; padding: 0; }
-#map { position: absolute; top: 0; bottom: 0; width: 100%; }
-</style>
 </head>
 <body>
-<style>
-    #menu {
-        position: absolute;
-        background: #efefef;
-        padding: 10px;
-        font-family: 'Open Sans', sans-serif;
-    }
-</style>
 
 <div id="map"></div>
-
-<div id="menu">
-    <input id="gunsjohnson/cm4fgrtbp001k01qv5uyu8hoh" type="radio" name="rtoggle" value="agricultural" checked="checked">
-    <label for="gunsjohnson/cm4fgrtbp001k01qv5uyu8hoh">agricultural</label>
+<nav id="layer_menu"></nav>
+<div class="map-overlay" id="legend"></div>
+<div class="map-overlay" id="features"></div>
+<div class="map-overlay" id="menu">
     <input id="mapbox/standard" type="radio" name="rtoggle" value="standard">
-    <label for="mapbox/standard">standard</label>
+    <label label for="mapbox/standard">standard</label>
+    <input id="gunsjohnson/cm4fgrtbp001k01qv5uyu8hoh" type="radio" name="rtoggle" value="geographic" checked="checked">
+    <label for="gunsjohnson/cm4fgrtbp001k01qv5uyu8hoh">geographic</label>
 </div>
-<script>
-	mapboxgl.accessToken = 'pk.eyJ1IjoiZ3Vuc2pvaG5zb24iLCJhIjoiY20zOGt3NjFnMG5wbTJucjF2aHBpMmMzMSJ9.CqXAiHaMIBWoQKm3EPiPUQ';
-    const map = new mapboxgl.Map({
-        container: 'map',
-        style: 'mapbox://styles/gunsjohnson/cm4fgrtbp001k01qv5uyu8hoh',
-        center: [-0.66987, 52.38075],
-        zoom: 9
-    });
-
-    const layerList = document.getElementById('menu');
-    const inputs = layerList.getElementsByTagName('input');
-
-    for (const input of inputs) {
-        input.onclick = (layer) => {
-            const layerId = layer.target.id;
-            map.setStyle('mapbox://styles/' + layerId);
-        };
-    }
-</script>
+<div class="map-overlay" id="sliderbar">
+  <h2>Year: <label id="active-year">2010</label></h2>
+  <input
+    id="slider"
+    class="row"
+    type="range"
+    min="0"
+    max="10"
+    step="1"
+  />
+</div>
+<script src="script.js"></script>
 
 </body>
 </html>
